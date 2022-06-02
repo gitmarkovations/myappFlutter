@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (index) {
             currentPage = index; 
             pageController.animateToPage(index, 
-                                        duration: Duration(milliseconds: 200), 
+                                        duration: Duration(milliseconds: 250), 
                                         curve: Curves.easeOutQuad
                                         );
             print('index: $index');
