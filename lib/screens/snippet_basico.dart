@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
