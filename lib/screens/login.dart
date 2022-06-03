@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/screens/home_screen.dart';
+import 'package:myapp/screens/pagina02.dart';
 import 'package:myapp/screens/snippet_basico.dart';
 
 class Login extends StatefulWidget {
@@ -102,10 +103,10 @@ class CustomButton extends StatelessWidget {
         ),
         onPressed: () => {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()))
+              context, MaterialPageRoute(builder: (context) => Pagina02()))
         },
         child: Center(
-          child: Text('Ingresar'),
+          child: Text('Acceder'),
         ),
       ),
     );
