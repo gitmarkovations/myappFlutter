@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/screens/home_screen.dart';
 import 'package:myapp/screens/snippet_basico.dart';
- 
+
 class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
@@ -21,6 +21,7 @@ class _LoginState extends State<Login> {
 
 Widget cuerpoLogin() {
   return Container(
+    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       decoration: BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
@@ -28,8 +29,16 @@ Widget cuerpoLogin() {
               fit: BoxFit.cover)),
       child: Center(
         child: Column(
+          
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [nombre(), campoInputs(), campoContra() ],
+          children: [
+            nombre(),
+            campoInputs(),
+            campoContra(),
+            CustomButton(
+              color: Colors.red,
+            )
+          ],
         ),
       ));
 }
@@ -59,61 +68,46 @@ Widget campoInputs() {
 Widget campoContra() {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-    child: TextField(
-      style: TextStyle(color: Colors.white),
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: "Contraseña",
-        // fillColor: Colors.white,
-        // filled: false,
-        hintStyle: TextStyle(color: Colors.white),
-        filled: false,
+    child: Center(
+      child: TextField(
+        style: TextStyle(color: Colors.white),
+        obscureText: true,
+        decoration: InputDecoration(
+          hintText: "Contraseña",
+          // fillColor: Colors.white,
+          // filled: false,
+          hintStyle: TextStyle(color: Colors.white),
+          filled: false,
+        ),
       ),
     ),
   );
 }
 
+class CustomButton extends StatelessWidget {
+  //final Color ? color ; -- para que digas que es opcional
+  final Color color;
 
-class BotonEntrar extends StatelessWidget{
-   
-
+  const CustomButton({required this.color});
   @override
-Widget build  (BuildContext context  ) {
-  return Scaffold(
-   
+  Widget build(BuildContext context) {
     
-    body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('Ingresar'),
-          ElevatedButton(
-              onPressed: () => {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()))
-                  }, child: null,)
-        ],
+    return Container(
+      child: ElevatedButton(
+        
+        style: ElevatedButton.styleFrom(
+          primary: Color.fromRGBO(6, 28, 45 ,1), // Background color
+          padding: EdgeInsets.all(10),
+          
+        ),
+        onPressed: () => {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeScreen()))
+        },
+        child: Center(
+          child: Text('Ingresar'),
+        ),
       ),
-    ),
-  );
-}}
-
-// Widget botonEntrar(BuildContext context){
-
-
-//   return ElevatedButton(
-//     // color: Color.fromRGBO(6, 28, 45 ,1),
-    
-//     // textColor: Colors.white,
-//     // padding:EdgeInsets.symmetric(horizontal: 50,vertical: 15),
-    
-//     child: Text("Entrar",style: TextStyle(fontSize: 18),),
-//     onPressed:()=>{
-//        print('hola'),
-//        Navigator.push(context, MaterialPageRoute(builder:  (context)=>HomeScreen()))
-//     },
-
-//   );
-// }
+    );
+  }
+}
