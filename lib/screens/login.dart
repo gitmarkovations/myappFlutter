@@ -102,6 +102,7 @@ class CustomButton extends StatelessWidget {
           
         ),
         onPressed: () => {
+          _mostrarAlerta(context),
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Pagina02()))
         },
@@ -111,4 +112,44 @@ class CustomButton extends StatelessWidget {
       ),
     );
   }
+}
+
+
+
+// void _mostrarAlerta(BuildContext context){
+//   showDialog(
+//     context: context,
+    
+//      child:AlertDialog(
+//     title: Text('HOLAAAAAAAAAAAAAAA'),
+//   ))
+// }
+
+
+Future<void> _mostrarAlerta(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // para que no se cierre solo !
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Hola'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[
+              Text('Soy una alertaaaaa'),
+              
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Aceptar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
