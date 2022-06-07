@@ -22,39 +22,73 @@ class _LoginState extends State<Login> {
 
 Widget cuerpoLogin() {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: NetworkImage(
-                  "https://i.pinimg.com/originals/dc/15/eb/dc15ebc7d742091417cc4dfcede76930.jpg"),
-              fit: BoxFit.cover)),
-      child: Center(
+              image: AssetImage('images/fondoLogin.png'),
+              fit: BoxFit.cover,
+              ),),
+       
         child: Column(
-          
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             nombre(),
             campoInputs(),
             campoContra(),
+            campoEmpresa(),
             CustomButton(
               color: Colors.red,
             )
           ],
         ),
-      ));
+      );
 }
 
 Widget nombre() {
-  return Text(
-    "Bienvenido 💻  ",
-    style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: 'arial'),
+  return Column(
+    children: [
+      Text(
+        "Bienvenido   ",
+        style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: 'arial'),
+        textAlign: TextAlign.left,
+      ),
+      Text(
+        "Ingresar tus datos para continuar   ",
+        style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'arial'),
+        textAlign: TextAlign.left,
+      ),
+    ],
+  );
+}
+
+Widget campoEmpresa() {
+
+  final _formKey = GlobalKey<FormState>();
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    key: _formKey,
+    child: TextFormField(
+
+      style: TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        hintText: "Usuario",
+        // fillColor: Colors.white,
+        // filled: false,
+        hintStyle: TextStyle(color: Colors.white),
+      ),
+    ),
   );
 }
 
 Widget campoInputs() {
+
+  final _formKey = GlobalKey<FormState>();
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-    child: TextField(
+    key: _formKey,
+    child: TextFormField(
+
       style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         hintText: "Usuario",
@@ -67,10 +101,18 @@ Widget campoInputs() {
 }
 
 Widget campoContra() {
+  final _formKeyContra = GlobalKey<FormState>();
   return Container(
+    key: _formKeyContra,
     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     child: Center(
-      child: TextField(
+      child: TextFormField(
+        validator: (value) {
+          if (value == "" || value == null) {
+            return "hola";
+          }
+          return null;
+        },
         style: TextStyle(color: Colors.white),
         obscureText: true,
         decoration: InputDecoration(
@@ -92,19 +134,24 @@ class CustomButton extends StatelessWidget {
   const CustomButton({required this.color});
   @override
   Widget build(BuildContext context) {
-    
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color:Colors.white
+      ),
       child: ElevatedButton(
-        
         style: ElevatedButton.styleFrom(
-          primary: Color.fromRGBO(6, 28, 45 ,1), // Background color
-          padding: EdgeInsets.all(10),
-          
+          primary: Color.fromRGBO(6, 28, 45, 1), // Background color
+          padding: EdgeInsets.all(10), 
         ),
-        onPressed: () => {
-          _mostrarAlerta(context),
+        
+        onPressed: ()   {
+          // if( ){
+ 
+          // }
+          _mostrarAlerta(context);
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Pagina02()))
+              context, MaterialPageRoute(builder: (context) => Pagina02()));
         },
         child: Center(
           child: Text('Acceder'),
@@ -114,41 +161,39 @@ class CustomButton extends StatelessWidget {
   }
 }
 
-
-
 // void _mostrarAlerta(BuildContext context){
 //   showDialog(
 //     context: context,
-    
+
 //      child:AlertDialog(
 //     title: Text('HOLAAAAAAAAAAAAAAA'),
 //   ))
 // }
-
 
 Future<void> _mostrarAlerta(BuildContext context) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // para que no se cierre solo !
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Hola'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: const <Widget>[
-              Text('Soy una alertaaaaa'),
-              
-            ],
+      return Center(
+        child: AlertDialog(
+          title: const Text('Advertencia',style:TextStyle (color:Colors.red),),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Complete los campos.'),
+              ],
+            ),
           ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Aceptar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
         ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Aceptar'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
       );
     },
   );
